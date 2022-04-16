@@ -1,1 +1,1 @@
-add_subdirectory("I:/source/repos/glfw")
+add_subdirectory(glfw)

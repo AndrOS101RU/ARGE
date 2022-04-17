@@ -1,9 +1,9 @@
-﻿#include "ARGE.h"
+#include "ARGE/ARGE.hpp"
 
-using namespace std;
-
-int main()
+namespace ARGE
 {
-	cout << "Hello CMake." << endl;
-	return 0;
+	int main()
+	{
+		return 0;
+	}
 }

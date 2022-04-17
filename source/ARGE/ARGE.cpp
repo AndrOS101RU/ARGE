@@ -1,9 +1,9 @@
 #include "ARGE/ARGE.hpp"
 
-namespace ARGE
+using namespace ARGE;
+
+int main()
 {
-	int main()
-	{
-		return 0;
-	}
+	Window window;
+	return 0;
 }

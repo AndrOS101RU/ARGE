@@ -10,6 +10,8 @@ namespace ARGE
 		Window();
 		~Window();
 
+		void Create();
+
 		bool Loop();
 
 	private:

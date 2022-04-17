@@ -5,12 +5,14 @@ set(CMAKE_CXX_STANDARD 20)
 
 find_package(OpenGL REQUIRED)
 
+set(SRC "${ARGE_SOURCE_DIR}/")
+
 add_subdirectory(
 	libs/
-	include/
 )
 
 include_directories(
+	libs/
 	include/
 )
 
@@ -22,12 +24,15 @@ add_library(GLAD STATIC
   libs/glad/glad.c
 )
 
-include_directories(libs)
-
 add_executable (ARGE "source/ARGE/ARGE.cpp")
+
+target_precompile_headers(ARGE PUBLIC
+	"include/ARGE/pch.hpp"
+)
 
 target_include_directories(ARGE PUBLIC 
 	libs/glfw/include
+	include
 )
 
 target_link_libraries(ARGE

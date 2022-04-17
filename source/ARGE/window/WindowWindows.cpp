@@ -2,7 +2,18 @@
 
 namespace ARGE
 {
-	Window::Window() {
+	Window::Window() 
+	{
+		
+	}
+
+	Window::~Window()
+	{
+		glfwDestroyWindow(window);
+	}
+
+	void Window::Create() 
+	{
 		// glfw preferences
 		glfwInit();
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
@@ -14,7 +25,7 @@ namespace ARGE
 		if (window == NULL)
 		{
 			std::cout << "Failed to create GLFW window" << std::endl;
-			return -1;
+			exit(-1);
 		}
 		glfwMakeContextCurrent(window);
 		glfwSetFramebufferSizeCallback(window, WindowSizeCallback);
@@ -23,29 +34,25 @@ namespace ARGE
 		if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
 		{
 			std::cout << "Failed to initialize GLAD" << std::endl;
-			return -1;
+			exit(-1);
 		}
 
 		glViewport(0, 0, 640, 480);
 	}
 
-	Window::~Window()
-	{
-		glfwDestroyWindow(window);
-	}
-
-	Window::Loop()
+	bool Window::Loop()
 	{
 		if (!glfwWindowShouldClose)
 		{
 			glfwSwapBuffers(window);
 			glfwPollEvents();
+			return true;
 		}
 		else
-			return 0;
+			return false;
 	}
 
-	Window::WindowSizeCallback(int x, int y, int width, int height) {
+	void Window::WindowSizeCallback(int x, int y, int width, int height) {
 		glViewport(x, y, width, height);
 	}
 }

@@ -4,7 +4,6 @@ namespace ARGE
 {
 	Window::Window() 
 	{
-		
 	}
 
 	Window::~Window()
@@ -28,7 +27,7 @@ namespace ARGE
 			exit(-1);
 		}
 		glfwMakeContextCurrent(window);
-		glfwSetFramebufferSizeCallback(window, WindowSizeCallback);
+		glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
 		// Initialize GLAD
 		if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
@@ -52,7 +51,12 @@ namespace ARGE
 			return false;
 	}
 
-	void Window::WindowSizeCallback(int x, int y, int width, int height) {
-		glViewport(x, y, width, height);
+	void Window::WindowSizeCallback(GLFWwindow* window, int width, int height) {
+		glViewport(0, 0, width, height);
+	}
+
+	void framebuffer_size_callback(GLFWwindow* window, int width, int height)
+	{
+		glViewport(0, 0, width, height);
 	}
 }

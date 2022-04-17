@@ -7,8 +7,13 @@ find_package(OpenGL REQUIRED)
 
 set(SRC "${ARGE_SOURCE_DIR}/")
 
+file(GLOB_RECURSE SOURCE
+  "${SRC}source/*.cpp"
+  "${SRC}include/*.hpp"
+)
+
 add_subdirectory(
-	libs/
+	libs
 )
 
 include_directories(
@@ -24,10 +29,12 @@ add_library(GLAD STATIC
   libs/glad/glad.c
 )
 
-add_executable (ARGE "source/ARGE/ARGE.cpp")
+add_executable(ARGE ${SOURCE})
+
+source_group(TREE ${SRC} FILES ${SOURCE})
 
 target_precompile_headers(ARGE PUBLIC
-	"include/ARGE/pch.hpp"
+	"${SRC}include/ARGE/pch.hpp"
 )
 
 target_include_directories(ARGE PUBLIC 
@@ -36,5 +43,8 @@ target_include_directories(ARGE PUBLIC
 )
 
 target_link_libraries(ARGE
+	${OPENGL_LIBRARY}
+    ${GLFW_LIBRARIES}
+	glfw
 	GLAD
 )

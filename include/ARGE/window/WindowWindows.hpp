@@ -17,6 +17,8 @@ namespace ARGE
 	private:
 		GLFWwindow* window = nullptr;
 
-		void WindowSizeCallback(int x, int y, int width, int height);
+		void WindowSizeCallback(GLFWwindow* window, int width, int height);
 	};
+
+	void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 }
